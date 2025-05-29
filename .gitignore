@@ -172,3 +172,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Docker volumes and data
+postgres_data/
+
+# Environment overrides
+.env.local
+.env.production
