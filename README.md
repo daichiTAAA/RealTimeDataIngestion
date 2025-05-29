@@ -10,6 +10,7 @@
 - **Kafka**: メッセージストリーミングプラットフォーム
 - **Schema Registry**: Avroスキーマの管理
 - **Zookeeper**: Kafkaのコーディネーション
+- **AKHQ**: KafkaとSchema RegistryのWebベースGUI管理ツール
 
 ## セットアップと起動
 
@@ -48,6 +49,7 @@ docker compose ps
 - **Kafka**: localhost:9092
 - **Schema Registry**: http://localhost:8081
 - **Debezium Connect**: http://localhost:8083
+- **AKHQ (Kafka GUI)**: http://localhost:8080
 
 ## FastAPI CRUD操作
 
@@ -98,6 +100,27 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic users --from-be
 # 商品テーブルの変更を監視
 kafka-console-consumer --bootstrap-server localhost:9092 --topic products --from-beginning
 ```
+
+## AKHQ GUI の使用
+
+AKHQはKafkaとSchema RegistryのWebベースGUIです：
+
+1. **Webブラウザでアクセス**: http://localhost:8080
+
+2. **利用可能な機能**:
+   - Kafkaトピックの閲覧と管理
+   - メッセージの表示と検索
+   - Schema Registryのスキーマ管理
+   - Debezium Connectコネクタの監視
+   - コンシューマーグループの確認
+
+3. **トピック確認**:
+   - 左メニューから「Topic」を選択
+   - `users` と `products` トピックでCDCイベントを確認可能
+
+4. **スキーマ確認**:
+   - 左メニューから「Schema Registry」を選択
+   - Avroスキーマの管理と確認が可能
 
 ## データベース直接アクセス
 
