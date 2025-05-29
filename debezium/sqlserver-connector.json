@@ -1,0 +1,19 @@
+{
+  "name": "sqlserver-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
+    "database.hostname": "sqlserver",
+    "database.port": "1433",
+    "database.user": "sa",
+    "database.password": "SqlServer123!",
+    "database.dbname": "testdb",
+    "database.server.name": "sqlserver-server",
+    "topic.prefix": "sqlserver-server",
+    "table.include.list": "dbo.users,dbo.products",
+    "database.encrypt": "false",
+    "transforms": "route",
+    "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
+    "transforms.route.regex": "([^.]+)\\.([^.]+)\\.([^.]+)",
+    "transforms.route.replacement": "sqlserver_$3"
+  }
+}

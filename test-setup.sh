@@ -29,7 +29,10 @@ required_files=(
     "fastapi/requirements.txt"
     "postgres/postgresql.conf"
     "postgres/init/01-init.sql"
+    "sqlserver/init/01-init.sql"
+    "sqlserver/init/entrypoint.sh"
     "debezium/postgres-connector.json"
+    "debezium/sqlserver-connector.json"
     "setup-debezium.sh"
 )
 
