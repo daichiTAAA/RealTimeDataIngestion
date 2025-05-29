@@ -119,7 +119,7 @@ services:
       - "8000:8000"
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/testdb
-      SQLSERVER_URL: mssql+pyodbc://sa:SqlServer123!@sqlserver:1433/testdb?driver=ODBC+Driver+17+for+SQL+Server
+      SQLSERVER_URL: mssql+pymssql://sa:SqlServer123!@sqlserver:1433/testdb
     volumes:
       - ./fastapi:/app
     networks:

@@ -19,7 +19,7 @@ Base = declarative_base()
 
 # SQL Server Database configuration
 SQLSERVER_URL = os.getenv(
-    "SQLSERVER_URL", "mssql+pyodbc://sa:SqlServer123!@sqlserver:1433/testdb?driver=ODBC+Driver+17+for+SQL+Server"
+    "SQLSERVER_URL", "mssql+pymssql://sa:SqlServer123!@sqlserver:1433/testdb"
 )
 
 sqlserver_engine = create_engine(SQLSERVER_URL)
@@ -127,7 +127,12 @@ app = FastAPI(title="Real-Time Data Ingestion API", version="1.0.0")
 # Create tables on startup
 @app.on_event("startup")
 def create_tables():
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+        print("PostgreSQL tables created successfully")
+    except Exception as e:
+        print(f"Failed to create PostgreSQL tables: {e}")
+    
     # Note: SQL Server tables are created via initialization script
 
 
