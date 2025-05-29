@@ -98,7 +98,7 @@ def health_check():
 # User endpoints
 @app.post("/users/", response_model=UserResponse)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
-    db_user = User(**user.dict())
+    db_user = User(**user.model_dump())
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -122,7 +122,7 @@ def update_user(user_id: int, user_update: UserUpdate, db: Session = Depends(get
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
     
-    update_data = user_update.dict(exclude_unset=True)
+    update_data = user_update.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(user, field, value)
     
@@ -143,7 +143,7 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
 # Product endpoints
 @app.post("/products/", response_model=ProductResponse)
 def create_product(product: ProductCreate, db: Session = Depends(get_db)):
-    db_product = Product(**product.dict())
+    db_product = Product(**product.model_dump())
     db.add(db_product)
     db.commit()
     db.refresh(db_product)
@@ -167,7 +167,7 @@ def update_product(product_id: int, product_update: ProductUpdate, db: Session =
     if product is None:
         raise HTTPException(status_code=404, detail="Product not found")
     
-    update_data = product_update.dict(exclude_unset=True)
+    update_data = product_update.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(product, field, value)
     
